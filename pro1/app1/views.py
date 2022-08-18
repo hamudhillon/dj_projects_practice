@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
+from .models import blogPost
 # Create your views here.
 def index(request):
     data=[
@@ -19,15 +20,15 @@ def post(request):
     # if len(list(request.GET.values())):
     #     title=request.GET['Title']
     #     print(title)
-
     if request.method=='POST':
-        print(request.POST)
-        title=request.POST['Title']
-        image=request.FILES['Image']
+        print('Im Here in Post')
+        name=request.POST['Title']
         desc=request.POST['desc']
+        Image=request.FILES['Image']
         cat=request.POST['cat']
-        print(title)
-        print(image)
-        print(desc)
-        print(cat)
+        ob=blogPost()
+        ob.title=name
+        ob.desc=desc
+        ob.image=Image
+        ob.save()
     return render(request,'Post.html')

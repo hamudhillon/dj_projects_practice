@@ -1,18 +1,19 @@
-{% extends 'base.html' %} {% block 'title' %}POST{% endblock 'title' %} <br /> {% block 'content' %}
+{% extends 'base.html' %} {% block 'title' %}POST{% endblock 'title' %} <br />
+{% block 'content' %}
 
 <form action="?" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="text" name="Title" placeholder="Enter Title" />
-    <textarea name="desc" placeholder="Enter a DESC"> </textarea>
-    <input type="file" name="Image" />
-    <select name="cat" id="">
+  {% csrf_token %}
+  <input type="text" name="Title" placeholder="Enter Title" />
+  <textarea name="desc" placeholder="Enter a DESC"> </textarea>
+  <input type="file" name="Image" />
+  <select name="cat" id="">
     <option value="TECH">TECH</option>
     <option value="POLITICAL">POLITICAL</option>
     <option value="SPORTS">SPORTS</option>
     <option value="ENTERTAINMENT">ENTERTAINMENT</option>
   </select>
 
-    <button>Create</button>
+  <button>Create</button>
 </form>
 
 {% endblock 'content' %}
