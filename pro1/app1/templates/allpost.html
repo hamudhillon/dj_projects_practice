@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block 'title' %}ALL POST{% endblock 'title' %}
+
+<br />
+
+{%block 'content' %}
+<center><h1>ALL POST</h1></center>
+{% for i in data %}
+<div>
+  <img src="{{i.image.url}}" width="400" />
+  <h1>{{i.title}}</h1>
+  <p>{{i.desc}}</p>
+  {{i.id}}
+  <button><a href=""> Edit</a></button>
+  <button><a href="delete/{{i.id}}">Delete</a></button>
+</div>
+{% endfor %} {% endblock 'content' %}

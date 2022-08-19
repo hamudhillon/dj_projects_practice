@@ -32,3 +32,20 @@ def post(request):
         ob.image=Image
         ob.save()
     return render(request,'Post.html')
+
+def allpost(request):
+    context={}
+
+    ob=blogPost.objects.all()
+    context.update({
+        'data':ob,
+    })    
+
+    return render(request,'allpost.html',context)
+
+def delete(request,id):
+
+    ob=blogPost.objects.get(id=id)
+    ob.delete()
+
+    return redirect('allpost')
