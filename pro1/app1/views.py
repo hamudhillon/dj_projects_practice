@@ -49,3 +49,22 @@ def delete(request,id):
     ob.delete()
 
     return redirect('allpost')
+    
+def edit(request,id):
+    ob=blogPost.objects.get(id=id)
+    if request.method=='POST':
+        name=request.POST['Title']
+        desc=request.POST['desc']
+        
+        try:
+            request.FILES['Image']
+            ob.image=request.FILES['Image']
+        except:
+            pass
+        ob.title=name
+        ob.desc=desc
+        ob.save()
+    
+        return redirect('allpost')
+
+    return render(request,'edit.html',{"data":ob})
