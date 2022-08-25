@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app1'
+    'app1',
+    'urlshort'
 
 ]
 
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'pro1.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['urlshort/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
