@@ -1,6 +1,9 @@
+
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from .models import blogPost
+from .forms import Myform
+
 # Create your views here.
 def index(request):
     data=[
@@ -68,3 +71,28 @@ def edit(request,id):
         return redirect('allpost')
 
     return render(request,'edit.html',{"data":ob})
+
+
+def myformview(request):
+    
+    if request.method=='POST':
+        form=Myform(request.POST or None,request.FILES or None)
+        if form.is_valid():
+            ob=blogPost()
+            name=form.cleaned_data['title']
+            desc=form.cleaned_data['desc']
+            post_by=form.cleaned_data['post_by']
+            
+            try:
+                
+                ob.image=form.cleaned_data['image']
+            except:
+                pass
+            ob.title=name
+            ob.desc=desc
+            ob.post_by=post_by
+            ob.save()
+            return HttpResponse('/Submited/')
+    else:
+        form=Myform()
+    return render(request,'dforms.html',{'form':form})

@@ -59,7 +59,7 @@ ROOT_URLCONF = 'pro1.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['urlshort/templates'],
+        'DIRS': ['app1/templates','urlshort/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
