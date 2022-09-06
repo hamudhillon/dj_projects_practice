@@ -1,4 +1,3 @@
-from dataclasses import field
 from django import forms
 from .models import blogPost
 class Myform(forms.Form):
@@ -20,12 +19,22 @@ class Myform(forms.Form):
                 "class": "form-control"
             }
     ))
-    # image=forms.ImageField()
+    image=forms.ImageField(required=False,widget=forms.FileInput(
+        attrs={
+            "required":'False'
+        }
+
+    ))
     class Meta:
         model=blogPost
         fields=('title','post_by','desc',
-        # 'image'
+        'image'
         )
+
+
+class Myform2(forms.Form):
+
+    name=forms.EmailField(widget=forms.EmailInput())
 
        
      

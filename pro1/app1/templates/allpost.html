@@ -4,6 +4,10 @@
 
 {%block 'content' %}
 <center><h1>ALL POST</h1></center>
+<form action="?" method="get">
+  {{filter.form}}
+  <button>Search</button>
+</form>
 {% for i in data %}
 <div>
   <img src="{{i.image.url}}" width="400" />

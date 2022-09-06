@@ -2,8 +2,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from .models import blogPost
-from .forms import Myform
-
+from .forms import Myform, Myform2
+from .filters import myfilter
 # Create your views here.
 def index(request):
     data=[
@@ -17,7 +17,15 @@ def index(request):
         {"data":data}
         )
 def emp(request,name):
-     return render(request,'emp.html',{'name':name})
+
+    if request.method=='POST':
+        form=Myform2(request.POST or None,request.FILES or None)
+        if form.is_valid:
+            return HttpResponse('Submited')
+    else:
+        form=Myform2()
+
+    return render(request,'emp.html',{'name':name,'form':form})
 
 def post(request):
     # if len(list(request.GET.values())):
@@ -38,10 +46,14 @@ def post(request):
 
 def allpost(request):
     context={}
-
+   
     ob=blogPost.objects.all()
+
+    myfilters=myfilter(request.GET,queryset=ob)
+    ob=myfilters.qs
     context.update({
         'data':ob,
+        'filter':myfilters
     })    
 
     return render(request,'allpost.html',context)
@@ -82,9 +94,8 @@ def myformview(request):
             name=form.cleaned_data['title']
             desc=form.cleaned_data['desc']
             post_by=form.cleaned_data['post_by']
-            
+            print(form.cleaned_data.get('image'))
             try:
-                
                 ob.image=form.cleaned_data['image']
             except:
                 pass
